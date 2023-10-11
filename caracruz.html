@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Cara o cruz</h1>
+</body>
+<script>
+    // crear juego cara o cruz. Nosotros siempre seremos cara que sera el numero 1.
+    // el programa tiene que decidir un numero aleatorio entre 1 y 2. si sale 1 ganamos, si sale 2 perdemos.
+    // math random
+
+    var cara = 1;
+    var cruz = 2;
+    switch (Math.floor(Math.random() * 2) + 1) {     // el + 1 indica que el numero minimo es 1 y * 2 indica que el numero maximo es 2
+        case 1:
+            console.log("Victoria rey. ");
+            break;
+        case 2:
+            console.log("Has perdido. ");
+            break;
+        default:
+            console.log("Error 404. ");
+            break;
+    }
+</script>
+</html>
