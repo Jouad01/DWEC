@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Palindromos</title>
+</head>
+<style>
+        section {
+            max-width: 400px;
+            margin: 0 auto;
+            text-align: center;
+            padding: 20px;
+        }
+
+        h2 {
+            font-size: 26px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+</style>
+<body>
+    <section>
+        <h2>Inserte una palabra para el nivel 1: </h2>
+        <input type="text" id="palabra">
+        <button onclick="palindromoNivel1()">Comprueba palabra</button>
+        <h2>Inserte una palabra para el nivel 2: </h2>
+        <input type="text" id="palabra2">
+        <button onclick="palindromoNivel2()">Comprueba palabra</button>
+        <h2>Inserte una palabra para el nivel 3: </h2>
+        <input type="text" id="palabra3">
+        <button onclick="palindromoNivel3()">Comprueba palabra</button>
+    </section>
+
+
+
+    <script>
+    function palindromoNivel1(){
+        // Nivel 1 - sin tener en cuenta mayusculas ni minusculas
+        // ex: Ana
+        var palabra = document.getElementById("palabra").value;
+        var inputReverse = "";
+        for (var i = 0; i < palabra.length; i++) {
+            inputReverse = palabra.charAt(i) + inputReverse;
+        }
+        if (palabra.toLowerCase() === inputReverse.toLowerCase()){
+            alert("Es palindromo");
+        } else {
+            alert("No es palindromo");
+        }
+    }
+    
+    function palindromoNivel2() {
+        //     Nivel 2 - sin tener en cuanta espacios
+        // ex: A na Ana
+        var palabra2 = document.getElementById("palabra2").value;
+        var inputReverse2 = "";
+        for (var i = 0; i < palabra2.length; i++) {
+            inputReverse2 = palabra2.charAt(i) + inputReverse2;
+        }
+        // si la palabra es igual a la palabra invertida sin espacios es palindromo
+        // replace(/\s/g, '') quita los espacios
+        if (palabra2.toLowerCase().replace(/\s/g, '') === inputReverse2.toLowerCase().replace(/\s/g, '')) {
+            alert("Es palindromo");
+        } else {
+            alert("No es palindromo");
+        }
+    }
+        // Too hot to hoot --> frase
+    
+    function palindromoNivel3() {
+        var palabra3 = document.getElementById("palabra3").value;
+        var inputReverse3 = "";
+        var quitarAcentos = {
+            'á': 'a',
+            'é': 'e',
+            'í': 'i',
+            'ó': 'o',
+            'ú': 'u'
+        };
+        
+        for (var i = 0; i < palabra3.length; i++) {
+            inputReverse3 = palabra3.charAt(i) + inputReverse3;
+        }
+        // quitar acentos
+        for (var i in quitarAcentos) {
+            var regex = new RegExp(i, 'g');
+            palabra3 = palabra3.replace(regex, quitarAcentos[i]);
+            inputReverse3 = inputReverse3.replace(regex, quitarAcentos[i]);
+        }
+
+        if (palabra3.toLowerCase().replace(/\s/g, '') === inputReverse3.toLowerCase().replace(/\s/g, '')) {
+            alert("Es palindromo");
+        } else {
+            alert("No es palindromo");
+        }
+    }
+</script>
+</body>
+</html>
