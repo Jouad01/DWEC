@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tareas del hogar</title>
+</head>
+<body>
+    <script>
+        // la clase Familia tendra los parametros que luego se instanciaran
+        class Familia {
+            constructor(nombre, miembros, tareas, semanas) {
+            this.nombre = nombre;
+            this.miembros = miembros;
+            this.tareas = tareas;
+            this.semanas = semanas;
+        }
+
+    // metodo para planificar las tareas
+    planificarTareas(){
+        for (var semana = 1; semana <= this.semanas; semana++) {
+            console.log('Semana ' + semana + ': ');
+            for (var j = 0; j < this.miembros.length; j++) {
+                // se crea la variable para recorrer los miembros
+                var recorrerMiembro = this.miembros[j];
+                // la variable indice se utiliza con el modulo que dara el resto 
+                // de la division entre el numero de tareas y el numero de miembros, - 1 porque el array empieza en 0
+                var indice = (semana - 1 + j) % this.tareas.length;
+                var recorreTareas = this.tareas[indice];
+                console.log('En la familia ' + this.nombre + ' ' + 'el/la ' + recorrerMiembro + ' realiza ' + recorreTareas + ' |');
+            }
+            console.log('---------------------------------');
+        }
+    }
+
+}
+
+
+// instanciamos las familias con sus parametros
+    familiaSastre = new Familia("Sastre", 
+    ["Padre", "Madre", "Hijo", "Hija"], 
+    ["Poner lavadora", "Limpiar coche", "Limpiar baño"], 52);
+
+    familiaTorrens = new Familia("Torrens", 
+    ["Padre", "Madre", "Hijo", "Hija"], 
+    ["Planchar", "Limpiar baño"], 4);
+
+    familiaMoll = new Familia("Moll", 
+    ["Padre", "Madre", "Hijo", "Hija grande", "Hija pequeña"], 
+    ["Poner lavadora", "Limpiar cocina", "Limpiar comedor", "Planchar", "Limpiar baño"], 12);
+
+    familiaSastre.planificarTareas();
+    familiaTorrens.planificarTareas();
+    familiaMoll.planificarTareas();
+    
+    </script>
+</body>
+</html>

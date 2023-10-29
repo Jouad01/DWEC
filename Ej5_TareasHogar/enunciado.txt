@@ -1,0 +1,15 @@
+Las familias Sastre, Torrens y Moll quieren planificar las tareas semanales que tienen que 
+hacer en sus respectivas casas para repartirlas equitativamente entre sus miembros.
+
+La familia Sastre  consta de: padre, madre, hijo e hija y sus tareas son: poner lavadora, limpiar cocina y limpiar baño.
+La familia Torrens consta de: padre, madre, hijo e hija y solo quiere repartir dos tareas semanales: planchar y limpiar baño.
+La familia Moll consta de: padre, madre, hijo, hija grande e hija pequeña y quiere repartir 5 tareas: 
+poner lavadora, limpiar cocina, limpiar comedor, planchar y limpiar baño.
+La familia Sastre quiere una planificación anual de sus tareas (52 semanas).
+La familia Torrens, en cambio, quiere una planificación mensual de 4 semanas.
+La familia Moll, quiere una planificación de 12 semanas, es decir, trimestral.
+
+Crear un algoritmo (solo uno) que resuelva cualquier de estas casuísticas (u otras futuras) y que muestre por 
+pantalla la solución proporcionada para que, cada semana, el programa diga qué tarea tiene que hacer cada miembro de la familia.
+
+Recordad usar orientación a objetos.

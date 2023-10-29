@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function Marca(nombre) {
+            this.nombre = nombre;
+        }
+
+        function Modelo(marca, nombre) {
+            this.marca = marca;
+            this.nombre = nombre;
+        }
+
+        var ford = new Marca('Ford')
+        var toyota = new Marca('toyota')
+        var mercedes = new Marca('mercedes')
+
+        var mustang = new Modelo(ford, 'Mustang')
+        var corolla = new Modelo(toyota, 'Corolla')
+        var yaris = new Modelo(toyota, 'Yaris')
+        var a45 = new Modelo(mercedes, 'A45')
+
+        var modelos = [];
+        modelos.push(mustang);
+        modelos.push(corolla);
+        modelos.push(yaris);
+        modelos.push(a45);
+
+        // Ex1
+        // document.querySelector('body').innerHTML = '<p>' + mustang.marca.nombre + ' ' + mustang.nombre + '</p>';
+
+        // Ex2 tabla con coches
+        /* table
+            /* tr
+                /* th marca /th
+                /* th modelo /th
+            /* tr
+        */
+
+
+        // SOLUCION BUENA
+        
+        // var tabla = '<table><tr><th>Marca</th><th>Modelo</th></tr>';
+        // for (var i = 0; i < modelos.length; i++) {
+        //     tabla = tabla + '<tr><td>' + modelos[i].marca.nombre + '</td><td>' + modelos[i].nombre + '</td></tr>';
+        // }
+        // tabla += '</table>';
+        // document.body.innerHTML = tabla;
+
+
+
+
+        // Solucion Alex (profe)
+        var tabla = document.createElement('table')
+
+        var trCabecera = document.createElement('tr');
+        tabla.appendChild(trCabecera);
+
+        var thMarca = document.createElement('th');
+        thMarca.innerHTML = 'Marca';
+
+        var thModelo = document.createElement('th');
+        thModelo.innerHTML = 'Modelo';
+
+        trCabecera.appendChild(thMarca);
+        trCabecera.appendChild(thModelo);
+        
+        for (var i = 0; i < modelos.length; i++) {
+            var trInfo = document.createElement('tr');
+
+            var tdMarca = document.createElement('td');
+            tdMarca.innerHTML = modelos[i].marca.nombre;
+            
+            var tdModelo = document.createElement('td');
+            tdModelo.innerHTML = modelos[i].nombre;
+
+            trInfo.appendChild(tdMarca);
+            trInfo.appendChild(tdModelo);
+
+            tabla.appendChild(trInfo);
+
+            if(i % 2 == 0) {
+                tabla.removeChild(trInfo);
+            }
+        }
+
+        var body = document.querySelector('body');
+        body.appendChild(tabla);
+
+        
+    </script>
+</body>
+</html>

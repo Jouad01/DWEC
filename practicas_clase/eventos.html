@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eventos</title>
+</head>
+<body>
+    <p>Hola me pondré en rojo</p>
+    <p>Hola me pondré en rojo</p>
+    <p>Hola me pondré en rojo</p>
+    <p>Hola me pondré en rojo</p>
+
+    <script>
+        // Eventos
+        // Un evento es una función que se ejecuta después de que el usuario realice una acción en concreto
+        // 1. HTML -> <p onACCION = ""> <p onclick = "hola()">
+        // 2. Listener 
+        document.querySelector('p').addEventListener('click', function(){
+            document.querySelector('p').style.color='red';
+        })
+
+        var parrafos = document.querySelectorAll('p');
+        for (var i = 0; i < parrafos.length; i++) {
+            parrafos[i].addEventListener('click', function(ev) {
+                for(var j = 0; j <arguments.length; j++) {
+                    console.log(arguments[j]);
+                }
+            })
+        }
+    </script>
+</body>
+</html>
