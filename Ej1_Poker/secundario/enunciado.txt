@@ -1,0 +1,13 @@
+En este ejercicio haremos el juego de... ¡POKER! Partiendo de las cartas adjuntas a
+el ejercicio debe hacer que cuando se pulse el botón "Jugar", el programa le muestre por
+pantalla 5 cartas diferentes (recuerde que, una vez elegida una carta, no puede
+volver a aparecer!). Una vez mostradas las cartas por pantalla, el programa le
+debe decir si ha ganado o no. Para simplificar el problema, elija sólo una
+combinación ganadora de póker (pareja, trío, escalera, escalera real...).
+
+En el ejemplo está la combinación ganadora de una pareja.
+
+Una vez terminado el ejercicio debe implementar las siguientes soluciones con el BOM:
+Cuando se pulse el botón de jugar, se abrirá una ventana nueva de 800px x 300px con la solución del juego.
+Añadir a la ventana principal dos botones, uno para cerrar la ventana del juego y el otro para cerrar todo el programa (ventana del juego y la propia ventana principal).
+En la ventana emergente del juego, coloque un botón para refrescar la página y mostrar así, una solución diferente en cada refresco.
