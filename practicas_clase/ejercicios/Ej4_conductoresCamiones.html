@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Camiones</title>
+</head>
+<body>
+    <script>
+        // Empresa con 3 chofer de camión y 4 camiones.
+        // Cada chofer debe conducir un camión durante una semana.
+        // La semana siguiente debe cambiar de camión.
+        // El camión que descansa cada semana debe ser distinto.
+        // RESULTADO:
+        // Semana 1: Juan conduce Scania | Pep conduce Volvo | Tomeu conduce Man. Descansa camion Iveco
+        // ...
+        // Semana 50: Juan conduce Volvo | Pep conduce Man| Tomeu conduce Scadia. Descansa camion Iveco
+        // Semana 51: Juan conduce Man | Pep conduce Scadia | Tomeu conduce Iveco. Descansa camion Volvo
+        // Semana 52: Juan conduce Scadia | Pep conduce Iveco | Tomeu conduce Volvo. Descansa camion Man
+
+
+        var chofers = ['Pep', 'Juan', 'Tomeu'];
+        var camiones = ['Volvo', 'Scania', 'Man', 'Iveco'];
+        var semanas = 52;
+        for (var semana = 1; semana <= semanas; semana++) {
+            var asingacion = '';
+            for (var i = 0; i < chofers.length; i++) {
+                var conductor = chofers[i];
+                var camionIndice = (semana + i) % camiones.length; // clave
+                var camion = camiones[camionIndice]
+                asingacion += ' ' + conductor + ' conduce ' + camion + ' |';
+            }
+            console.log('Semana ' + semana + ': ' + asingacion);
+        }
+</script>
+</body>
+</html>

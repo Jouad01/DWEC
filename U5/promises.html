@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+        Promise: objeto para representar un comportamiento asincrono
+
+        3 estados:
+
+        - Pending: estado inicial, no se ha cumplido ni rechazado
+        - Fulfilled: se ha cumplido
+        - Rejected: se ha rechazado
+
+        */
+
+        const x = new Promise(function(resolve, rejected) {
+
+        })
+
+
+        /* x estara pendiente hasta que se llame a resolve o reject
+        Cuando acaba la promesa se llama al metodo:
+        - then: se ha cumplido
+        - catch: se ha rechazado
+        */
+        
+        const wait = new Promise(function(resolve, rejected) {
+            setTimeout(function() {
+                resolve("Finalizo bien")
+            }, 5000)
+        }).then(function(valor) {
+            console.log("Ha entrado en el then", valor);
+        }).catch(function(error) {
+            console.log("Ha finalizado mal", error);
+        })
+        console.log(wait);
+
+        // Ajax fetch
+        fetch("http://95.39.145.183/ejercicios/color.php?min=30&max=50", {
+            method: 'GET'
+        }).then(function(respuesta1) {
+            return respuesta1.json();
+        }).then(function(respuesta2) {
+            console.log("Respuesta 2", respuesta2);
+        })
+        
+
+        </script>
+</body>
+</html>

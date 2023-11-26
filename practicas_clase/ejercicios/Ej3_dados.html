@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dados</title>
+</head>
+<body>
+    <script>
+        // crear un juego de dados. El dado debe aceptar un numero variable de caras.
+        //  caraCruz = 2 caras 
+        //  dado parchis = 6 caras
+        //  dado rol = 12 caras
+        // Crear un objeto dado con una propiedad 'numCaras' y una funcion sera 'tirarDado' que sacara un
+        // numero aleatorio entre 1 y numCaras. Usuario siempre juega con 1 dado.
+
+        function numCaras(caras) {
+            this.numCaras = caras;
+            this.tirarDado = function() {
+                return Math.floor(Math.random() * this.numCaras) + 1;
+            }
+        }
+
+        var dados = [new numCaras(2), new numCaras(6), new numCaras(12)];
+
+        for (var i = 0; i < dados.length; i++) {
+            var tirada = dados[i].tirarDado();
+            if (tirada == 1) {
+                console.log("Has sacado un 1. Has ganado. ");
+            } else {
+                console.log("Has perdido. " + " " + (i+1) + " salio" + " " + tirada);
+            }
+        }
+
+</script>
+</body>
+</html>

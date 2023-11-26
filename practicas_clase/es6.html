@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        
+        // ES5 --> 2009
+        // ES6 --> 2015 (variables, modulos, apis, scopes, promises)
+        // ES14 --> 2023
+        
+        /*
+        Variables
+
+        ES5 - var
+        ES6 - let, const
+
+        let --> declarar variables (sobreescribir)
+        const --> declarar constantes no se pueden sobreescribir
+        */
+
+        // let x = 1;
+        // x = 2;
+        // document.write(x);
+
+
+        const y = 5;
+        const z = [];
+        z.push(1);
+        z.push(10);
+        // document.write(z);
+
+        const pep = {
+            name : 'pep',
+            surname : 'guardiola'
+        }
+
+        pep.name = 'pepito';
+        
+        // Usar constantes:
+        // - Mas rapido
+        // - Aseguras de que el tipo no cambie (estatico)
+        // - Evita problemas de inicializacion. (debe ser inicializada la constante)
+    
+        /*
+        Diferencia var y let/const
+        var --> ambito de funcion
+        let/const --> ambito de bloque
+        */
+
+        function vanilla() {
+            for(var i = 0; i<5; i++) {
+                var j = i + 3;
+                console.log("i", i, "j", j);
+            }
+        }
+        vanilla();
+
+        // Redeclarar variables
+        function redeclare() {
+            var x = 2;
+            var x = 4;
+            console.log(x);
+
+            let y = 4;
+            console.log(y)
+        }
+        redeclare();
+
+        // hoisting
+        // function hoist(){
+        //     var h1 = 'no hoisted';
+        //     h2 = 'hoisted';
+        //     console.log('hoist', h1);
+        // }
+        // function hoist2() {
+        //     console.log('hoist2', h1);
+        // }
+
+        // hoist();
+        // hoist2();
+
+
+
+        // Funciones Avanzadas
+        function qa(){
+            // arguments <-- numero de argumentos
+            // son valores
+            // CLOUSURES Y ARROW FUNCTIONS <-- ES6
+        }
+
+        // CLOUSURES
+        function clousure(a, b) {
+            function esnclousure(x, y) {
+                return x + y;
+            }
+            function esnclousure2(x, y) {
+                return x * y;
+            }
+
+            return esnclousure(a, b) - esnclousure2(a, b);
+        }
+
+        console.log(clousure(3, 4)); // 3 + 4 - 3 * 4 = -5
+    
+        /* ARROW FUNCTIONS */
+        // Old way
+        setTimeout(function() {
+            clousure(6, 7);
+        }, 1000)
+
+        // New way
+        setTimeout(() => {
+            clousure(6, 7);
+        }, 1000)
+
+        // 1- Si no tiene {} se considera que hace un return
+
+        function suma(a, b) {
+            return a + b;
+        }
+
+        function multiplicar(a, b) {
+            return a * b;
+        }
+
+        function operacion(a, b, cb) {
+            return cb(a, b);
+        }
+
+        console.log(operacion(3, 4, suma));
+        console.log(operacion(3, 4, multiplicar));
+        console.log(operacion(3, 4, function(a, b) {
+            return a - b;
+        }));
+
+    
+        console.log(operacion(3, 4, (a, b) => {
+            return a - b;
+        }));
+
+        console.log(operacion(3, 4, (a, b) => a - b));
+    </script>
+</body>
+</html>

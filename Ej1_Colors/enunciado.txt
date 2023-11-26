@@ -1,0 +1,11 @@
+Realiza un pequeño programa para pintar un cuadrado y el color del fondo. 
+Este programa hará que se conecte al servidor a través de XMLHttpRequest (y sólo con esta tecnología) 
+para obtener los datos. El servidor le devolverá dos colores y dos valores (width y height). 
+Uno de los colores será para pintar el color de fondo de su web, el otro será para pintar un div 
+con un rectángulo de tamaño dado por ambos valores. Los datos de conexión son los siguientes:
+
+Esta función le devolverá un objeto en formato JSON con 4 propiedades:
+background: color hexadecimal que deberá pintar el color de fondo del body
+color: color hexadecimal que deberá pintar el rectángulo
+width: ancho del rectángulo (en px)
+height: altura del rectángulo (en px)

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Esto es una pagina de matematicas</h2>
+    <script src="mates.js"></script>
+    <script src="matesBinarias.js"></script>
+    <script type="module">
+
+        import {suma, multiplicacion, dosPi} from './mates.js';
+        import {sumaBinaria, multiplicacion as multiBin} from './matesBinarias.js';
+
+
+        console.log(suma(4, 7));
+    
+        console.log(multiplicacion(6, 5));
+
+        // suma binaria
+        console.log(sumaBinaria(4, 7));
+
+        // multiplicacion binaria
+        console.log(multiBin(6, 5));
+
+        // dosPi
+        console.log(dosPi);
+
+        /*
+        Que es un modulo? Es un archivo de javascript que exporta items funciones, clases, variables, etc
+
+        Como se carga? import
+
+        - Podemos definir explicitamente que partes queremos cargar haciendo uso de DESTRUCTING 
+        - Si no se define que propiedad cargar, se carga default
+        - Admiten alias. Si hay ambigüedades se puede usar alias
+
+        Para que un import funcione es necesario declarar el script omo modulo
+
+        OJOOOOOOOO!!!! el DOM no tiene visibilidad de los modulos, por lo que no se puede usar en el
+
+
+
+        /* SOLUCION DOM */
+        /* CHAPUCILLA */
+        /* window.printme = printme; */
+    </script>
+</body>
+</html>

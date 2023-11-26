@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Peticion colores</title>
+</head>
+<body>
+    <h2>Resultado: </h2>
+    <button onclick="pintar()">Color</button>
+    <div id="resultado"></div>
+    <div id="cuadrado" style="color:white">Cuadrado</div>
+    <script>
+    /* URL: http://95.39.145.183/ejercicios/color.php
+    Method: GET
+    Paràmetres:
+    min: integer. Altura mínima que tindrà el rectangle.
+    max: integer. Altura màxima que tindrà el rectangle. */
+    function pintar() {
+        const req = new XMLHttpRequest();
+        req.onreadystatechange = function(){
+        if(this.readyState == 4) {
+            console.log(this.responseText);
+            const respuesta = JSON.parse(this.responseText);
+            document.body.style.backgroundColor = respuesta.background;
+
+            document.getElementById("cuadrado").style.height = respuesta.height + "px";
+            document.getElementById("cuadrado").style.width = respuesta.height + "px";
+            document.getElementById("cuadrado").style.backgroundColor = respuesta.color;
+        }
+        
+    }
+
+    req.open("GET", "http://95.39.145.183/ejercicios/color.php?min=100&max=200");
+    req.send();
+
+
+// hacer con fetch
+
+
+    }
+    </script>
+</body>
+</html>

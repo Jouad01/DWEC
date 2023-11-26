@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Usuarios</title>
+</head>
+
+<body>
+    <h3>Mostrar tabla</h3>
+    <button id = "boton" onclick="usuarios()">Pulsar para ver usuarios</button>
+    <script>
+        /* Crear una table en html de usuarios recuperando los datos de:
+            URL: http://95.39.145.183/ejercicios/usuarios.php
+            method: GET
+            response: JSON
+
+
+            Tabla: Username, Name, Surname y Sex
+
+            Y utilizando fetch
+        
+        */
+
+        function usuarios(color, background, width) {
+            document.getElementById('boton').style.display = 'none';
+
+            fetch('http://95.39.145.183/ejercicios/usuarios.php', { 
+                method: 'GET'
+        })
+                .then(response => response.json())
+                .then(datos => {
+                    let table = document.createElement('table');
+
+                    let encabezar = document.createElement('tr');
+                    ['Username', 'Name', 'Surname', 'Sex'].forEach(campo => {
+                        let th = document.createElement('th');
+                        th.textContent = campo;
+                        encabezar.appendChild(th);
+                    });
+                    table.appendChild(encabezar);
+
+                    datos.forEach(usuario => {
+                        let tr = document.createElement('tr');
+                        ['username', 'name', 'surname', 'sex'].forEach(campo => {
+                            let td = document.createElement('td');
+                            td.textContent = usuario[campo];
+                            tr.appendChild(td);
+                        });
+                        table.appendChild(tr);
+                    });
+                    document.body.appendChild(table);
+                })
+                .catch(error => console.error('Error amigo:', error));
+            }
+        /* Ahora el tamaño del texto de la tabla de usuarios estara definido por la variable width
+        el color de la letra lo definira la variable "color" y el color del fondo de la tabla lo definira la variable "background"
+        "http://95.39.145.183/ejercicios/color.php?min=10&max=20"
+        */
+
+        function getColor() {
+            fetch("http://95.39.145.183/ejercicios/color.php?min=30&max=50")
+            .then((r) => r.json())
+            .then((respuesta) => {
+                console.log("respuesta", respuesta);
+                
+            })
+        }
+        (function () {
+            getColor();
+        })();
+        
+        /*
+        Promise.all(array de promesas).then(array de respuesta)
+
+        promise.all espera a que todas las peticiones acaben correctamente
+       */
+
+        const colorPromise = fetch("http://95.39.145.183/ejercicios/color.php?min=30&max=50").then((r) => r.json());
+        const userPromise = fetch('http://95.39.145.183/ejercicios/usuarios.php').then((r) => r.json());
+
+
+        Promise.all([colorPromise, userPromise]).then(function(arrayResponses) {
+            const color = arrayResponses[0];
+            const users = arrayResponses[1];
+        })
+
+
+
+
+        // 10 PETICIONES ASINCRONO PINTANDO LOS RESULTADOS ORDENADOS
+        // URL: http://34.147.66.205/ejercicios/asincrono.php
+        // Method: GET
+        // Return: txt
+
+        
+    </script>
+</body>
+
+</html>
