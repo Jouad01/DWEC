@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>OOP JS</h1>
+    <script>
+        /* EJERCICIO CLASES
+            CLASS -> como se crea, como afecta el this, crear un constructor, implementar get y set,
+            Propiedades privadas y crear metodos para publicarlas, declarar un metodo estatico
+        
+            Ejemplo -> Persona y un profesor que herede de persona
+        */
+        class Persona {
+            constructor(nombre, apellido, edad) {
+                this._nombre = nombre;
+                this._apellido = apellido;
+                this._edad = edad;
+            }
+
+            get nombre() {
+                return this._nombre;
+            }
+
+            set nombre(nombre) {
+                this._nombre = nombre;
+            }
+
+            get apellido() {
+                return this._apellido;
+            }
+
+            set apellido(apellido) {
+                this._apellido = apellido;
+            }
+
+            get edad() {
+                return this._edad;
+            }
+
+            set edad(edad) {
+                this._edad = edad;
+            }
+        }
+
+        class Profesor extends Persona {
+            constructor(nombre, apellido, edad, materia) {
+                super(nombre, apellido, edad);
+                this._materia = materia;
+            }
+
+            get materia() {
+                return this._materia;
+            }
+
+            set materia(materia) {
+                this._materia = materia;
+            }
+        }
+
+        let persona1 = new Persona("Kenzo", "Tenma", 30);
+        let persona2 = new Profesor("Shigeru", "Miyamoto", 71, "Programación");
+
+        function imprimirPersona(persona) {
+            console.log(persona);
+        }
+
+        
+        imprimirPersona(persona1);
+        imprimirPersona(persona2);
+    </script>
+</body>
+
+</html>

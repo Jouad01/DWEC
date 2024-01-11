@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Usuarios</title>
+</head>
+
+<body>
+    <script type="module">
+        import { getUsuariosConMap } from '../controlador/usuarioControlador.js'
+
+        async function mostrarUsuarios() {
+            const users = await getUsuariosConMap();
+            const color = {
+                color: 'black',
+                background: 'lightgray',
+                width: 14
+            };
+            pintarTabla(color, users);
+        }
+
+        function pintarTabla(color, users) {
+            const tabla = document.createElement("TABLE");
+            tabla.style.color = color.color;
+            tabla.style.backgroundColor = color.background;
+            tabla.style.fontSize = color.width + "px";
+
+            const trHeader = document.createElement("TR");
+            tabla.appendChild(trHeader);
+
+            const thUsername = document.createElement("TH");
+            thUsername.innerHTML = "Username";
+            trHeader.appendChild(thUsername);
+
+            const thName = document.createElement("TH");
+            thName.innerHTML = "Name";
+            trHeader.appendChild(thName);
+
+            const thSurname = document.createElement("TH");
+            thSurname.innerHTML = "Surname";
+            trHeader.appendChild(thSurname);
+
+            const thSex = document.createElement("TH");
+            thSex.innerHTML = "Sex";
+            trHeader.appendChild(thSex);
+
+            const thTranport = document.createElement("TH");
+            thTranport.innerHTML = "Transport";
+            trHeader.appendChild(thTranport);
+
+            for (let i = 0; i < users.length; i++) {
+                const trData = document.createElement("TR");
+                tabla.appendChild(trData);
+
+                const tdUsername = document.createElement("TD");
+                tdUsername.innerHTML = users[i].username;
+                trData.appendChild(tdUsername);
+
+                const tdName = document.createElement("TD");
+                tdName.innerHTML = users[i].name;
+                trData.appendChild(tdName);
+
+                const tdSurname = document.createElement("TD");
+                tdSurname.innerHTML = users[i].surname;
+                trData.appendChild(tdSurname);
+
+                const tdSex = document.createElement("TD");
+                tdSex.innerHTML = users[i].sex;
+                trData.appendChild(tdSex);
+
+                const tdTransport = document.createElement("TD");
+                tdTransport.innerHTML = users[i].transport.nombre + '<img src="' + users[i].transport.url_imagen + '">';
+                trData.appendChild(tdTransport);
+
+            }
+            document.querySelector("body").appendChild(tabla);
+        }
+        mostrarUsuarios();
+        // console.log(mostrarUsuarios)
+
+    </script>
+</body>
+
+</html>
