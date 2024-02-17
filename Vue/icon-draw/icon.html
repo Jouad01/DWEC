@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Icon drawler</title>
+</head>
+
+<body>
+    <div id="app">
+        <h3>Buscador de iconos</h3>
+        <input type="text" v-model="busqueda">
+        <button @click="buscarIcono">Buscar</button>
+        <div v-html="icono"></div>
+    </div>
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script>
+        Vue.createApp({
+            data() {
+                return {
+                    busqueda: '',
+                    icono: ''
+                }
+            },
+            methods: {
+                buscarIcono() {
+                    fetch(`http://34.90.153.139/ejercicios/icono.php?nombre=${this.busqueda}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data && data.path) {
+                            this.icono = this.generarSVG(data);
+                        } else {
+                            this.icono = 'No se ha encontrado el icono';
+                        }
+                    })
+                },
+                generarSVG(data) {
+                    return `<h2>${data.label}</h2><svg width="${data.width}" height="${data.height}">
+                                <path d="${data.path}" />
+                            </svg>`;
+                }
+            }
+        }).mount('#app')
+    </script>
+</body>
+</html>

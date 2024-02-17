@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUD IndexedDB</title>
+</head>
+
+<body>
+
+    <input type="text" id="nombre">
+    <input type="text" id="color">
+    <button onclick="insertFruit()">Insertar fruta</button>
+    <button onclick="deleteFruit()">Borrar fruta</button>
+    <button onclick="updateFruit()">Actualizar fruta</button>
+    <button onclick="getFruits()">Mostrar frutas</button>
+    <button onclick="getGreenFruits()">Mostrar fruta verde</button>
+    <script>
+
+        // añadir un color a la fruta tanto modelo como formulario
+        // modificar añadir y eliminar con el color
+        // crear la funcion modificar (put)
+
+        const db = indexedDB.open('Frutas', 1);
+
+        // Solo entra si la version es superior a la que hay en el navegador
+        db.onupgradeneeded = function (event) {
+            const dataBase = event.target.result;
+            const frutaObjStore = dataBase.createObjectStore('Fruta', { keyPath: 'name' });
+            // frutaObjStore.createIndex("color", "color", { unique: true });
+            frutaObjStore.createIndex("color", "color");
+            frutaObjStore.add({ name: 'platano' });
+            frutaObjStore.add({ name: 'manzana', color: 'rojo' });
+        }
+
+        function insertFruit() {
+            const nombre = document.querySelector('#nombre').value;
+            const color = document.querySelector('#color').value;
+            const transaction = db.result.transaction(['Fruta'], 'readwrite');
+            transaction.objectStore('Fruta').add({ name: nombre, color: color });
+        }
+
+        function deleteFruit() {
+            const nombre = document.querySelector('#nombre').value;
+            const transaction = db.result.transaction(['Fruta'], 'readwrite');
+            transaction.objectStore('Fruta').delete(nombre);
+        }
+
+
+        function updateFruit() {
+            const nombre = document.querySelector('#nombre').value;
+            const color = document.querySelector('#color').value; 
+            const transaction = db.result.transaction(['Fruta'], 'readwrite');
+            transaction.objectStore('Fruta').put({ name: nombre, color: color });
+        }
+
+        function getFruits() {
+            const transaction = db.result.transaction(['Fruta'], 'readwrite');
+            const fruitTable = transaction.objectStore('Fruta').getAll();
+            fruitTable.onsuccess = function (event) {
+                const frutas = event.target.result;
+                console.log(frutas);
+            }
+        }
+
+        function getGreenFruits() {
+            const transaction = db.result.transaction(['Fruta'], 'readwrite');
+            const color = transaction.objectStore('Fruta').index('color');
+
+            color.getAll('verde').onsuccess = function (event) {
+                // const frutas = event.target.result;
+                // console.log(frutas);
+                console.log('Las frutas verdes son: ', event.target.result);
+            }
+        }
+    </script>
+</body>
+
+</html>

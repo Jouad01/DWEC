@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- Transaccion: conjunto operaciones -->
+    <script>
+        // This is what our customer data looks like.
+        const customerData = [
+            { ssn: "444-44-4444", name: "Bill", age: 35, email: "bill@company.com" },
+            { ssn: "555-55-5555", name: "Donna", age: 32, email: "donna@home.org" },
+        ];
+
+        // Let us open our database
+        let request = indexedDB.open("Jouad", 8); //IMPORTANTE VERSION
+
+        request.onupgradeneeded = (event) => {
+            // Save the IDBDatabase interface
+            const db = event.target.result;
+
+            
+            const objectStore = db.createObjectStore("customers", { keyPath: "ssn" }); // objectStore = tabla
+            objectStore.createIndex("name", "name", { unique: false });
+            objectStore.createIndex("email", "email", { unique: true });
+
+            objectStore.transaction.oncomplete = function(evento) {
+                let customerObjectStore = db.transaction("customers", "readwrite")
+                .objectStore("customers");
+                for (let i in customerData) {
+                    customerObjectStore.add(customerData[i]);
+                }
+            }
+        };
+
+        request.onsuccess = function(e) {
+            const db = e.target.result;
+            const transaction = db.transaction("customers", "readwrite");
+            const customer = transaction.objectStore("customers");
+            // customer.add({ ssn: "666-66-6666", name: "Jouad", age: 22, email: "jouad@gmail.org"});
+            customer.add({ ssn: "777-66-7776", name: "Gengis", age: 22, email: "gengis@gmail.org"});
+
+        }   
+    </script>
+</body>
+
+</html>

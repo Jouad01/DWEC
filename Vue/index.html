@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue</title>
+    <style>
+        .rojo {
+            color: red;
+        }
+        .azul{
+            color: blue;
+        }
+
+        .negrita {
+            font-weight: bold;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="aplicacion">
+        <h1>{{mensaje}} {{mensaje}}</h1>
+        <h2 v-show="usuario.nombre && usuario.apellido">El usuario es {{ usuario.nombre }} {{ usuario.apellido }}</h2>
+        <h2 :class="activeClass + ' negrita'">La notificacion 1 es: {{ notification[1] }}</h2>
+        <input type="text" v-model="mensaje">
+        <input type="text" v-model="usuario.nombre">
+        <input type="text" v-model="usuario.apellido">
+        <input type="text" v-model="usuario.direccion">
+        <button @click="enviarFormulario">Enviar</button>
+        <ul>
+            <li v-for="n in notification">{{n}}</li>
+        </ul>
+        <ul>
+            <li v-for="u in usuarios">{{u}}</li>
+        </ul>
+        <button @click="changeMessage">Cambiar mensaje</button>
+        <button @click="ordenarUsuarios">Ordenar usuarios</button>
+    </div>
+<!--  -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script>
+        Vue.createApp({
+            data(){
+                return {
+                    // Variables reactivas
+                    mensaje: 'Hola mundo con Vue',
+                    usuario: {
+                        nombre: 'Xing',
+                        apellido: 'Liu'
+                    }, 
+                    notification: ['Hola', 'Mundo', 'con', 'todos', 'los amigos'],
+                    activeClass: 'rojo',
+                    usuarios: [],
+                }
+            },
+            created() {
+                this.changeMessage()
+                // const usuarioFetch = fetch('http://34.90.153.139/ejercicios/usuarios.php')
+                // fetch de http://34.90.153.139/ejercicios/usuarios.php y pintarlo por consola
+                fetch('http://34.90.153.139/ejercicios/usuarios.php')
+                .then(response => response.json())
+                .then(resultado => {
+                    resultado.forEach(usuario => {
+                        this.usuarios.push(`${usuario.username} - ${usuario.name} - ${usuario.surname}`)
+                    })
+                    // this.usuarios.sort();
+                })
+            },
+            methods: {
+                changeMessage(){
+                    this.mensaje = 'Hello Vue!'
+                    this.activeClass = 'azul' // cuando se pulse cambia a azul
+                    this.notification.push('King') //añadir un nuevo mensaje
+                },
+                ordenarUsuarios(){
+                    this.usuarios.sort((a, b) => a.surname.localeCompare(b.surname));
+                },
+                enviarFormulario(){
+                    console.log(this.usuario)
+                }
+            }
+        }).mount('#aplicacion') //montar la aplicacion en el div con id aplicacion
+    </script>
+</body>
+</html>

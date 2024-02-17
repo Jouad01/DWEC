@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buscador ciudades</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th,
+        td {
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2
+        }
+
+        .highlight {
+            background-color: yellow;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Buscador de Ciudades</h1>
+    <input type="text" id="cityInput" placeholder="Palma">
+    <button>Buscar</button>
+    <p id="result"></p>
+    <script>
+        (async function () {
+            const openRequest = indexedDB.open("cities", 1);
+            openRequest.onupgradeneeded = async function (event) {
+                const db = event.target.result;
+                db.createObjectStore("city", { autoIncrement: true });
+                const remoteCitiesFetch = await fetch('https://raw.githubusercontent.com/David-Haim-zz/CountriesToCitiesJSON/master/countriesToCities.json');
+                const remoteCities = await remoteCitiesFetch.json();
+
+                const countries = Object.keys(remoteCities);
+
+                const countriesObj = countries.map(country => {
+                    return {
+                        country: country,
+                        cities: remoteCities[country]
+                    }
+
+                })
+                console.log(countriesObj);
+
+                const transaction = db.transaction(["city"], "readwrite");
+                const city = transaction.objectStore("city");
+
+                countriesObj.forEach(countryElement => {
+                    countryElement.cities.forEach(cityElement => {
+                        city.add({ ciudad: cityElement, pais: countryElement.country })
+                    })
+                });
+            };
+
+            document.querySelector("input").addEventListener("input", function (e) {
+                const valor = e.target.value;
+
+                if (valor.length >= 3) {
+                    console.log(valor);
+                    busca(valor);
+
+                    history.pushState({buscar: valor}, '', valor);
+                }
+            });
+
+            window.onpopstate = function (e) {
+                if (e && e.state && e.state.buscar) {
+                    document.querySelector("input").value = e.state.buscar;
+                    busca(e.state.buscar);
+                }
+            }
+
+            function busca(valor) {
+                const db = openRequest.result;
+                const transaccion = db.transaction(['city'], 'readonly');
+                const city = transaccion.objectStore('city');
+
+                const cities = city.getAll();
+
+                cities.onsuccess = function (e) {
+                    const citiesAll = e.target.result;
+                    const citiesFilter = citiesAll.filter(city =>
+                        city.ciudad.toUpperCase().includes(valor.toUpperCase()));
+
+                    console.log(citiesFilter);
+
+                    document.querySelector("#result").innerHTML = "<table id='tabla'><tr><th>Ciudad</th><th>Pais</th></tr></table>";
+                    const table = document.querySelector("#tabla");
+
+                    citiesFilter.forEach(city => {
+                        const row = table.insertRow(-1);
+                        row.insertCell(0).innerHTML = city.ciudad.toUpperCase()
+                        .split(valor.toUpperCase()).join(`<span class="highlight">${valor.toUpperCase()}</span>`);
+                        row.insertCell(1).innerHTML = city.pais;
+                    })
+                }
+            }
+        })();
+    </script>
+</body>
+
+</html>

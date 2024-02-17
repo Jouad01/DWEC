@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mapa España</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+
+<body>
+    <div id="error" style="display: none;">¡Error! La pieza del puzzle no coincide.</div>
+    <div class="container" ondrop="drop(event)" ondragover="allowDrop(event)">
+        <img src="assets/img/espana2.gif" usemap="#image-map">
+        <img src="assets/img/galicia.png" draggable="true" ondragstart="drag(event)" data-comunidad="galicia">
+        <img src="assets/img/catalunya.png" draggable="true" ondragstart="drag(event)" data-comunidad="catalunya">
+        <img src="assets/img/andalucia.png" draggable="true" ondragstart="drag(event)" data-comunidad="andalucia">
+        <img src="assets/img/castellalamanxa.png" draggable="true" ondragstart="drag(event)"
+            data-comunidad="castellalamanxa">
+
+        <map name="image-map">
+            <area data-comunidad="galicia" coords="223,14,443,222" shape="rect">
+            <area data-comunidad="catalunya" coords="1020,121,1288,382" shape="rect">
+            <area data-comunidad="andalucia" coords="373,581,870,867" shape="rect">
+            <area data-comunidad="castellalamanxa" coords="550,294,933,608" shape="rect">
+        </map>
+
+    </div>
+    <script src="main.js"></script>
+</body>
+
+</html>
